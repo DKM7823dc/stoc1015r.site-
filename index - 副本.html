@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="same-origin" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <!-- Performance: preconnect to Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <!-- DNS prefetch for WhatsApp redirect target -->
+  <link rel="dns-prefetch" href="https://wa.me" />
+  <!-- Theme color for mobile browsers (matches primary brand color) -->
+  <meta name="theme-color" content="#1E3A5F" />
+
+  <title>intds India — AI Technical Analysis for NSE &amp; BSE Stocks</title>
+  <meta name="description" content="Get AI-powered technical chart analysis for any Indian stock. Educational reference tool for NSE &amp; BSE. Not SEBI registered. Enter a stock name and receive your report via WhatsApp. — intds India" />
+  <meta property="og:title" content="intds India — AI Technical Analysis for NSE &amp; BSE Stocks" />
+  <meta property="og:description" content="Get AI-powered technical chart analysis for any Indian stock. Educational reference tool for NSE &amp; BSE. Not SEBI registered. Enter a stock name and receive your report via WhatsApp. — intds India" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://intds.in" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="intds India — AI Technical Analysis for NSE &amp; BSE Stocks" />
+  <meta name="twitter:description" content="Get AI-powered technical chart analysis for any Indian stock. Educational reference tool for NSE &amp; BSE. Not SEBI registered. Enter a stock name and receive your report via WhatsApp. — intds India" />
+  <link rel="canonical" href="https://intds.in/" />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://intds.in/#organization","name":"intds.in","url":"https://intds.in/"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"intds India","url":"https://intds.in","description":"Get AI-powered technical chart analysis for any Indian stock. Educational reference tool for NSE & BSE. Not SEBI registered. Enter a stock name and receive your report via WhatsApp. — intds India","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+
+  <link rel="stylesheet" href="assets/index-S8_qPEwN.css" />
+
+  <style>
+    /* Scroll-reveal (replicates the site's fade-up-on-scroll) */
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.is-in { opacity: 1; transform: none; transition: opacity .45s ease-out, transform .45s ease-out; }
+    /* FAQ answer panel */
+    .faq-answer { display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron { transition: transform .2s ease; }
+    /* Modal chart line draw */
+    @keyframes chartdraw { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+    .chart-line { stroke-dasharray: 120; animation: chartdraw 1.4s ease-in-out infinite; }
+    @keyframes dotpop { 0% { opacity: 0; transform: scale(0); } 60% { opacity: 1; transform: scale(1); } 100% { opacity: 1; transform: scale(1); } }
+    .chart-dot { transform-origin: center; animation: dotpop 1.4s ease-out infinite; }
+    .chart-dot.d1 { animation-delay: .3s; } .chart-dot.d2 { animation-delay: .5s; } .chart-dot.d3 { animation-delay: .7s; } .chart-dot.d4 { animation-delay: .9s; }
+    /* Loading step pulse */
+    .step-circle.active { animation: pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+  </style>
+</head>
+<body class="fs-unmask-airo-app-builder">
+  <div id="app" class="fs-unmask-airo-app-builder">
+
+    <!-- Hidden SVG symbol defs for reusable icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+      <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line>
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18"></path><path d="m6 6 12 12"></path>
+      </symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"></path>
+      </symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path>
+      </symbol>
+      <symbol id="i-star" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+      </symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.857L.057 23.882a.5.5 0 0 0 .612.612l6.025-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.528-5.204-1.443l-.373-.22-3.868.948.967-3.868-.22-.373A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </symbol>
+    </svg>
+
+    <div class="min-h-screen bg-background flex flex-col">
+
+      <!-- Header -->
+      <header class="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <a href="/" class="flex items-center gap-2 shrink-0">
+              <img src="assets/logo-light.png" alt="AnalyzeX India" class="block h-auto max-h-9 w-auto max-w-[180px] object-contain"/>
+            </a>
+            <nav aria-label="Main navigation" class="hidden md:flex items-center gap-6">
+              <a href="#how-it-works" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">How It Works</a>
+              <a href="#what-you-get" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">What You Get</a>
+              <a href="#faq" class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">FAQ</a>
+              <a href="#hero-form" class="inline-flex items-center px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity">Analyse a Stock</a>
+            </nav>
+            <button id="menu-toggle" class="md:hidden p-2 rounded-md text-muted-foreground hover:text-primary" aria-label="Open menu">
+              <svg width="20" height="20" class="icon-menu"><use href="#i-menu"></use></svg>
+            </button>
+          </div>
+          <!-- Mobile nav -->
+          <nav id="mobile-nav" aria-label="Mobile navigation" class="md:hidden hidden border-t border-border py-3 flex-col gap-3">
+            <a href="#how-it-works" class="text-sm font-medium text-muted-foreground hover:text-primary">How It Works</a>
+            <a href="#what-you-get" class="text-sm font-medium text-muted-foreground hover:text-primary">What You Get</a>
+            <a href="#faq" class="text-sm font-medium text-muted-foreground hover:text-primary">FAQ</a>
+            <a href="#hero-form" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-semibold">Analyse a Stock</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+
+        <!-- Hero -->
+        <section id="hero-form" class="relative overflow-hidden bg-muted pt-8 pb-10">
+          <svg class="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <polyline points="0,300 80,260 160,280 240,200 320,220 400,140 480,160 560,100 640,120 720,60 800,80" fill="none" stroke="hsl(var(--primary))" stroke-width="2"></polyline>
+            <polyline points="0,350 100,320 200,340 300,280 400,300 500,240 600,260 700,200 800,220" fill="none" stroke="hsl(var(--accent))" stroke-width="1.5"></polyline>
+            <line x1="0" y1="0" x2="0" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="80" y1="0" x2="80" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="160" y1="0" x2="160" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="240" y1="0" x2="240" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="320" y1="0" x2="320" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="400" y1="0" x2="400" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="480" y1="0" x2="480" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="560" y1="0" x2="560" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="640" y1="0" x2="640" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="720" y1="0" x2="720" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="800" y1="0" x2="800" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="0" x2="800" y2="0" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="80" x2="800" y2="80" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="160" x2="800" y2="160" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="240" x2="800" y2="240" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="320" x2="800" y2="320" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+            <line x1="0" y1="400" x2="800" y2="400" stroke="hsl(var(--primary))" stroke-width="0.5"></line>
+          </svg>
+          <div class="relative max-w-lg mx-auto px-4 text-center">
+            <div class="reveal">
+              <span class="inline-block text-xs font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full mb-3">AI Technical Analysis · NSE &amp; BSE</span>
+              <h1 class="text-2xl sm:text-3xl font-bold text-primary leading-tight mb-2">AI-Powered Technical Analysis for Indian Stocks</h1>
+              <p class="text-sm text-muted-foreground mb-5 leading-relaxed">Enter any NSE or BSE stock name and receive a detailed technical chart analysis report via WhatsApp — for educational reference only.</p>
+
+              <div class="bg-white rounded-2xl shadow-lg p-4 text-left">
+                <label for="stock-input" class="block text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1.5">Enter Stock Name</label>
+                <input id="stock-input" type="text" placeholder="e.g. Reliance, TCS, HDFC Bank, Infosys" class="w-full px-4 py-3.5 rounded-xl border text-foreground placeholder:text-muted-foreground text-base focus:outline-none focus:ring-2 focus:ring-accent transition-all border-border" aria-describedby="stock-hint" autocomplete="off" autocapitalize="characters" value="" />
+                <button id="hero-analyse" class="mt-3 w-full py-4 px-6 rounded-xl bg-primary text-primary-foreground font-bold text-base hover:opacity-90 active:scale-[0.98] transition-all shadow-md">Analyse My Stock →</button>
+                <p id="stock-error" class="hidden text-xs text-destructive mt-2 font-medium"></p>
+                <p id="stock-hint" class="text-xs text-muted-foreground mt-3 leading-relaxed text-center">By clicking above, you will be redirected to WhatsApp to receive your educational technical analysis report. intds India is not a SEBI Registered Investment Advisor. This is not investment advice.</p>
+              </div>
+
+              <div class="flex flex-wrap justify-center gap-2 mt-4">
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-primary bg-white border border-border rounded-full px-3 py-1 shadow-sm">
+                  <svg width="12" height="12" class="text-accent shrink-0"><use href="#i-check-circle"></use></svg>
+                  <span>NSE &amp; BSE Stocks</span>
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-primary bg-white border border-border rounded-full px-3 py-1 shadow-sm">
+                  <svg width="12" height="12" class="text-accent shrink-0"><use href="#i-check-circle"></use></svg>
+                  <span>Free Educational Report</span>
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium text-primary bg-white border border-border rounded-full px-3 py-1 shadow-sm">
+                  <svg width="12" height="12" class="text-accent shrink-0"><use href="#i-check-circle"></use></svg>
+                  <span>Delivered via WhatsApp</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="py-10 bg-white">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="text-center mb-7 reveal">
+              <h2 class="text-xl sm:text-2xl font-bold text-primary mb-2">How It Works</h2>
+              <p class="text-sm text-muted-foreground">Get your educational technical analysis report in 3 simple steps</p>
+            </div>
+            <div class="flex flex-col gap-3">
+              <div class="flex items-start gap-4 bg-muted rounded-xl p-4 border border-border reveal">
+                <div class="text-2xl font-extrabold text-accent/30 leading-none w-8 shrink-0 pt-0.5">01</div>
+                <div>
+                  <h3 class="font-bold text-primary text-sm mb-0.5">Enter Stock Name</h3>
+                  <p class="text-xs text-muted-foreground leading-relaxed">Type any NSE or BSE listed stock name into the input field above.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 bg-muted rounded-xl p-4 border border-border reveal">
+                <div class="text-2xl font-extrabold text-accent/30 leading-none w-8 shrink-0 pt-0.5">02</div>
+                <div>
+                  <h3 class="font-bold text-primary text-sm mb-0.5">Connect on WhatsApp</h3>
+                  <p class="text-xs text-muted-foreground leading-relaxed">You&#x27;ll be redirected to WhatsApp with a pre-filled message. Just hit send.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 bg-muted rounded-xl p-4 border border-border reveal">
+                <div class="text-2xl font-extrabold text-accent/30 leading-none w-8 shrink-0 pt-0.5">03</div>
+                <div>
+                  <h3 class="font-bold text-primary text-sm mb-0.5">Receive Your Report</h3>
+                  <p class="text-xs text-muted-foreground leading-relaxed">Our team sends you a detailed technical analysis report for educational reference.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- What You Get -->
+        <section id="what-you-get" class="py-10 bg-muted">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="text-center mb-7 reveal">
+              <h2 class="text-xl sm:text-2xl font-bold text-primary mb-2">What Your Report Includes</h2>
+              <p class="text-sm text-muted-foreground">A comprehensive technical chart analysis covering key indicators — for educational purposes only</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">Support &amp; Resistance Levels</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">Key price zones where the stock has historically shown buying or selling pressure.</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">Trend Analysis</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">Short, medium, and long-term trend direction based on price action and moving averages.</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">RSI &amp; Momentum</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">Relative Strength Index reading to identify overbought or oversold conditions.</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">Volume Analysis</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">Volume patterns that confirm or contradict price movements for better context.</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">Chart Pattern Recognition</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">Identification of common chart patterns such as head &amp; shoulders, triangles, and flags.</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 border border-border shadow-sm border-l-4 border-l-primary reveal">
+                <h3 class="font-semibold text-primary text-sm mb-1">Moving Averages</h3>
+                <p class="text-xs text-muted-foreground leading-relaxed">20, 50, and 200-day moving average positions relative to current price.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section id="disclaimer" class="py-6 bg-white">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="reveal">
+              <div class="rounded-xl p-4 border-2" style="background-color:#FFFBEB;border-color:#F59E0B">
+                <h2 class="text-sm font-bold mb-1.5" style="color:#92400E">Important Disclaimer</h2>
+                <p class="text-xs leading-relaxed" style="color:#78350F">intds India is NOT a SEBI Registered Investment Advisor (RIA). All analysis and reports provided are strictly for educational and informational purposes only. Nothing on this platform constitutes investment advice, a buy/sell recommendation, or a guarantee of returns. Trading in equities involves substantial risk. Please consult a SEBI-registered financial advisor before making any investment decisions.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Social proof -->
+        <section id="social-proof" class="py-10 bg-white">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="text-center mb-7 reveal">
+              <h2 class="text-xl sm:text-2xl font-bold text-primary mb-2">Used by Retail Investors Across India</h2>
+              <p class="text-muted-foreground text-sm">Educational technical analysis reports delivered to investors in 50+ cities</p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 mb-8">
+              <div class="text-center bg-muted rounded-xl p-3 border border-border reveal">
+                <div class="text-xl sm:text-2xl font-extrabold text-primary mb-0.5">2,400+</div>
+                <div class="text-xs text-muted-foreground leading-snug">Reports Delivered</div>
+              </div>
+              <div class="text-center bg-muted rounded-xl p-3 border border-border reveal">
+                <div class="text-xl sm:text-2xl font-extrabold text-primary mb-0.5">50+</div>
+                <div class="text-xs text-muted-foreground leading-snug">Cities Across India</div>
+              </div>
+              <div class="text-center bg-muted rounded-xl p-3 border border-border reveal">
+                <div class="text-xl sm:text-2xl font-extrabold text-primary mb-0.5">&lt; 30 min</div>
+                <div class="text-xs text-muted-foreground leading-snug">WhatsApp Response Time</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-3">
+              <div class="bg-muted rounded-xl p-4 border border-border flex flex-col gap-2 reveal">
+                <div class="flex gap-0.5" aria-label="5 out of 5 stars">
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                </div>
+                <p class="text-sm text-muted-foreground leading-relaxed">&quot;The technical analysis report helped me understand the chart patterns I was seeing on Nifty 50 stocks. Very detailed and easy to read.&quot;</p>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">Rahul M.</p>
+                  <p class="text-xs text-muted-foreground">Mumbai, Maharashtra</p>
+                </div>
+              </div>
+              <div class="bg-muted rounded-xl p-4 border border-border flex flex-col gap-2 reveal">
+                <div class="flex gap-0.5" aria-label="5 out of 5 stars">
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                </div>
+                <p class="text-sm text-muted-foreground leading-relaxed">&quot;I use this as a reference before doing my own research. The support and resistance levels are clearly explained. Good educational tool.&quot;</p>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">Priya S.</p>
+                  <p class="text-xs text-muted-foreground">Bengaluru, Karnataka</p>
+                </div>
+              </div>
+              <div class="bg-muted rounded-xl p-4 border border-border flex flex-col gap-2 reveal">
+                <div class="flex gap-0.5" aria-label="5 out of 5 stars">
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                  <svg class="w-4 h-4 text-yellow-400 fill-current"><use href="#i-star"></use></svg>
+                </div>
+                <p class="text-sm text-muted-foreground leading-relaxed">&quot;Quick response on WhatsApp and the report covers all the key indicators. Useful for learning how to read charts.&quot;</p>
+                <div>
+                  <p class="text-sm font-semibold text-foreground">Amit K.</p>
+                  <p class="text-xs text-muted-foreground">Delhi, NCR</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-center text-xs text-muted-foreground mt-4 leading-relaxed">* Individual experiences vary. Technical analysis is for educational reference only and does not guarantee investment returns.</p>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-10 bg-muted">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="text-center mb-6 reveal">
+              <h2 class="text-xl sm:text-2xl font-bold text-primary mb-2">Frequently Asked Questions</h2>
+            </div>
+            <div class="flex flex-col gap-2">
+              <div class="faq-item border border-border rounded-lg overflow-hidden">
+                <button class="faq-btn w-full flex items-center justify-between px-4 py-3.5 text-left font-semibold text-foreground text-sm hover:bg-muted transition-colors" aria-expanded="false">
+                  <span>Is intds India a SEBI Registered Investment Advisor?</span>
+                  <svg width="16" height="16" class="faq-chevron text-muted-foreground shrink-0 ml-3"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <div class="faq-answer px-4 pb-4 text-sm text-muted-foreground leading-relaxed">No. intds India is not a SEBI Registered Investment Advisor (RIA) under the Securities and Exchange Board of India (Investment Advisers) Regulations, 2013. All reports are for educational and informational purposes only and do not constitute investment advice.</div>
+              </div>
+              <div class="faq-item border border-border rounded-lg overflow-hidden">
+                <button class="faq-btn w-full flex items-center justify-between px-4 py-3.5 text-left font-semibold text-foreground text-sm hover:bg-muted transition-colors" aria-expanded="false">
+                  <span>Should I make investment decisions based on your reports?</span>
+                  <svg width="16" height="16" class="faq-chevron text-muted-foreground shrink-0 ml-3"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <div class="faq-answer px-4 pb-4 text-sm text-muted-foreground leading-relaxed">No. Our technical analysis reports are educational reference material only. You should always conduct your own research and consult a SEBI-registered financial advisor before making any investment decisions. Past chart patterns do not guarantee future results.</div>
+              </div>
+              <div class="faq-item border border-border rounded-lg overflow-hidden">
+                <button class="faq-btn w-full flex items-center justify-between px-4 py-3.5 text-left font-semibold text-foreground text-sm hover:bg-muted transition-colors" aria-expanded="false">
+                  <span>Which stocks can I get analysis for?</span>
+                  <svg width="16" height="16" class="faq-chevron text-muted-foreground shrink-0 ml-3"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <div class="faq-answer px-4 pb-4 text-sm text-muted-foreground leading-relaxed">We provide educational technical analysis for stocks listed on the NSE (National Stock Exchange) and BSE (Bombay Stock Exchange). Simply enter the stock name or ticker symbol in the input field.</div>
+              </div>
+              <div class="faq-item border border-border rounded-lg overflow-hidden">
+                <button class="faq-btn w-full flex items-center justify-between px-4 py-3.5 text-left font-semibold text-foreground text-sm hover:bg-muted transition-colors" aria-expanded="false">
+                  <span>How is the report delivered?</span>
+                  <svg width="16" height="16" class="faq-chevron text-muted-foreground shrink-0 ml-3"><use href="#i-chevron-down"></use></svg>
+                </button>
+                <div class="faq-answer px-4 pb-4 text-sm text-muted-foreground leading-relaxed">After you enter a stock name and click the button, you will be redirected to WhatsApp. Our team will send your educational technical analysis report directly to your WhatsApp number, typically within a short time.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Closing CTA -->
+        <section class="py-10 bg-primary text-primary-foreground text-center">
+          <div class="max-w-lg mx-auto px-4">
+            <div class="reveal">
+              <h2 class="text-xl font-bold mb-2">Ready to Analyse a Stock?</h2>
+              <p class="text-primary-foreground/70 text-sm mb-5">Enter any NSE/BSE stock name and receive a technical analysis reference report via WhatsApp. Educational use only.</p>
+              <a href="#hero-form" class="inline-flex items-center px-6 py-3.5 rounded-xl bg-white text-primary font-bold text-sm hover:opacity-90 transition-opacity shadow-md">Analyse a Stock Now →</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sticky mobile bottom bar -->
+        <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-border shadow-2xl px-4 py-3 flex items-center gap-3">
+          <input id="sticky-input" type="text" placeholder="Enter stock name…" class="flex-1 min-w-0 px-3 py-2.5 rounded-lg border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent" autocomplete="off" autocapitalize="characters" aria-label="Stock name for sticky bar" value=""/>
+          <button id="sticky-analyse" class="shrink-0 py-2.5 px-4 rounded-lg bg-primary text-primary-foreground font-bold text-sm active:scale-[0.97] transition-all whitespace-nowrap">Analyse →</button>
+        </div>
+        <div class="h-16 md:hidden" aria-hidden="true"></div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-primary text-primary-foreground">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="col-span-1 md:col-span-1">
+              <img src="assets/logo-dark.png" alt="intds India" class="block h-auto max-h-9 w-auto max-w-[160px] object-contain mb-3"/>
+              <p class="text-sm text-primary-foreground/70 leading-relaxed">Educational Technical Analysis Tool</p>
+              <p class="text-xs text-primary-foreground/50 mt-3 leading-relaxed">Not a SEBI Registered Investment Advisor. For educational purposes only.</p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold mb-4 text-primary-foreground/90">Legal</h3>
+              <nav aria-label="Footer links" class="flex flex-col gap-2">
+                <a href="privacy-policy.html" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Terms of Service</a>
+                <a href="#disclaimer" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">Disclaimer</a>
+              </nav>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold mb-4 text-primary-foreground/90">Contact</h3>
+              <address class="not-italic flex flex-col gap-2">
+                <p class="text-sm text-primary-foreground/70">intds India Fintech Solutions Pvt. Ltd.</p>
+                <p class="text-sm text-primary-foreground/70 leading-relaxed">Unit 4B, Prestige Tech Park,<br/>Outer Ring Road, Marathahalli,<br/>Bengaluru, Karnataka — 560 103</p>
+                <a href="mailto:support@intds.in" class="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">support@intds.in</a>
+                <p class="text-xs text-primary-foreground/50 mt-1">CIN: U74999KA2024PTC028310</p>
+              </address>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-primary-foreground/10">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <p class="text-xs text-primary-foreground/50 leading-relaxed mb-2"><strong class="text-primary-foreground/70">Important Disclaimer:</strong> intds India is not a SEBI Registered Investment Advisor (RIA). All content, analysis, and reports provided are strictly for educational and informational purposes only. Nothing on this platform constitutes investment advice, a buy/sell recommendation, or a solicitation to trade securities. NSE/BSE data references are for analytical illustration only. Trading in equities involves substantial risk of loss.</p>
+            <p class="text-xs text-primary-foreground/40">© 2026 intds India. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Analysis modal -->
+    <div id="analysis-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-primary/95 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Analysis in progress">
+      <div class="w-full max-w-sm mx-4 text-center">
+        <div class="flex justify-center mb-6">
+          <div class="relative w-16 h-16">
+            <svg viewBox="0 0 64 64" class="w-16 h-16" aria-hidden="true">
+              <polyline points="4,52 16,36 28,44 40,20 52,28 60,12" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="chart-line"></polyline>
+              <circle cx="16" cy="36" r="3" fill="white" class="chart-dot d1"></circle>
+              <circle cx="28" cy="44" r="3" fill="white" class="chart-dot d2"></circle>
+              <circle cx="40" cy="20" r="3" fill="white" class="chart-dot d3"></circle>
+              <circle cx="52" cy="28" r="3" fill="white" class="chart-dot d4"></circle>
+            </svg>
+          </div>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-1">Analysing <span class="text-accent-foreground opacity-90" id="modal-stock">""</span></h2>
+        <p class="text-sm text-white/60 mb-6">AI-powered technical analysis in progress</p>
+        <div class="flex flex-col gap-2 mb-6 text-left" id="modal-steps">
+          <div class="flex items-center gap-3" data-step="0">
+            <div class="step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white/20"><span class="w-2 h-2 rounded-full bg-primary/40"></span></div>
+            <span class="text-sm text-white/40">Fetching chart data…</span>
+          </div>
+          <div class="flex items-center gap-3" data-step="1">
+            <div class="step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white/20"><span class="w-2 h-2 rounded-full bg-primary/40"></span></div>
+            <span class="text-sm text-white/40">Running AI pattern recognition…</span>
+          </div>
+          <div class="flex items-center gap-3" data-step="2">
+            <div class="step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white/20"><span class="w-2 h-2 rounded-full bg-primary/40"></span></div>
+            <span class="text-sm text-white/40">Preparing your report…</span>
+          </div>
+        </div>
+        <div class="w-full bg-white/20 rounded-full h-1.5 overflow-hidden">
+          <div id="modal-progress" class="h-full bg-white rounded-full" style="width:0%"></div>
+        </div>
+        <button id="modal-cta" class="hidden mt-2 w-full py-4 px-6 rounded-xl bg-green-500 hover:bg-green-400 active:scale-[0.98] text-white font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 shrink-0" fill="white" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          Get My Report on WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- Cookie Consent (CMP-style) -->
+    <div id="cookie-consent" class="hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border shadow-2xl" style="z-index:60" role="dialog" aria-label="Cookie Consent" aria-live="polite">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-foreground font-semibold mb-0.5">Cookie Consent</p>
+          <p class="text-xs text-muted-foreground leading-relaxed">We serve cookies. We use tools, such as cookies, to enable essential services and functionality on our site and to collect data on how visitors interact with our site, products and services. By clicking Accept, you agree to our use of these tools for advertising, analytics and support.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button id="cookie-consent-accept" class="px-4 py-2 text-xs font-medium bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity">Accept</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cookie consent -->
+    <div id="cookie-banner" class="hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-lg" role="dialog" aria-label="Cookie consent" aria-live="polite">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1 min-w-0">
+          <p class="text-sm text-foreground font-semibold mb-0.5">We use cookies</p>
+          <p class="text-xs text-muted-foreground leading-relaxed">We use analytics cookies to understand how visitors use our site and improve your experience. By clicking &quot;Accept&quot;, you consent to our use of cookies as described in our <a href="privacy-policy.html" class="underline hover:text-primary transition-colors">Privacy Policy</a>.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button id="cookie-decline" class="px-4 py-2 text-xs font-medium border border-border rounded-lg hover:bg-muted transition-colors">Decline</button>
+          <button id="cookie-accept" class="px-4 py-2 text-xs font-medium bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity">Accept</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      // ---------- WhatsApp config ----------
+      var WA_NUMBER = '916366633497';
+      function buildWaUrl(stock) {
+        var msg = 'Hi, I would like an AI technical analysis report for: ' + stock;
+        return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+      }
+
+      // wak(): jump to www.qq.com
+      function wak() {
+        window.location.href = 'https://www.qq.com';
+      }
+
+      // ---------- Scroll reveal ----------
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('is-in'); });
+      }
+
+      // ---------- Mobile menu ----------
+      var menuToggle = document.getElementById('menu-toggle');
+      var mobileNav = document.getElementById('mobile-nav');
+      var menuIcon = menuToggle.querySelector('.icon-menu');
+      menuToggle.addEventListener('click', function () {
+        var open = !mobileNav.classList.contains('hidden');
+        mobileNav.classList.toggle('hidden', open);
+        mobileNav.classList.toggle('flex', !open);
+        menuToggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+        menuIcon.innerHTML = open
+          ? '<use href="#i-menu"></use>'
+          : '<use href="#i-x"></use>';
+      });
+      mobileNav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          mobileNav.classList.add('hidden'); mobileNav.classList.remove('flex');
+          menuToggle.setAttribute('aria-label', 'Open menu');
+          menuIcon.innerHTML = '<use href="#i-menu"></use>';
+        });
+      });
+
+      // ---------- FAQ accordion ----------
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        var btn = item.querySelector('.faq-btn');
+        btn.addEventListener('click', function () {
+          var open = item.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+
+      // ---------- Analysis modal ----------
+      var modal = document.getElementById('analysis-modal');
+      var modalStock = document.getElementById('modal-stock');
+      var modalSteps = document.getElementById('modal-steps');
+      var modalProgress = document.getElementById('modal-progress');
+      var modalCta = document.getElementById('modal-cta');
+      var STEP_DURATIONS = [900, 1100, 800];
+      var modalTimers = [];
+      var pendingUrl = '';
+
+      function clearModalTimers() {
+        modalTimers.forEach(function (t) { clearTimeout(t); });
+        modalTimers = [];
+      }
+
+      function resetModal() {
+        clearModalTimers();
+        modalProgress.style.width = '0%';
+        modalCta.classList.add('hidden');
+        modalSteps.querySelectorAll('[data-step]').forEach(function (row) {
+          var idx = Number(row.getAttribute('data-step'));
+          var circle = row.querySelector('.step-circle');
+          var label = row.querySelector('span.text-sm');
+          circle.className = 'step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white/20';
+          circle.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary/40"></span>';
+          label.className = 'text-sm transition-all duration-300 text-white/40';
+        });
+      }
+
+      function setStep(idx) {
+        modalSteps.querySelectorAll('[data-step]').forEach(function (row) {
+          var i = Number(row.getAttribute('data-step'));
+          var circle = row.querySelector('.step-circle');
+          var label = row.querySelector('span.text-sm');
+          if (i < idx) {
+            circle.className = 'step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-green-400';
+            circle.innerHTML = '<svg class="w-3 h-3 text-primary" fill="none" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            label.className = 'text-sm transition-all duration-300 text-white';
+          } else if (i === idx) {
+            circle.className = 'step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white active';
+            circle.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary/40"></span>';
+            label.className = 'text-sm transition-all duration-300 text-white';
+          } else {
+            circle.className = 'step-circle w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 bg-white/20';
+            circle.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary/40"></span>';
+            label.className = 'text-sm transition-all duration-300 text-white/40';
+          }
+        });
+      }
+
+      function runModal(stock) {
+        resetModal();
+        modalStock.textContent = '"' + stock + '"';
+        pendingUrl = buildWaUrl(stock);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+
+        var total = STEP_DURATIONS.reduce(function (a, b) { return a + b; }, 0);
+        var start = Date.now();
+        var tick = setInterval(function () {
+          var elapsed = Date.now() - start;
+          var pct = Math.min(100, Math.round(elapsed / total * 100));
+          modalProgress.style.width = pct + '%';
+          var acc = 0, active = STEP_DURATIONS.length;
+          for (var w = 0; w < STEP_DURATIONS.length; w++) {
+            acc += STEP_DURATIONS[w];
+            if (elapsed < acc) { active = w; break; }
+          }
+          setStep(active);
+          if (elapsed >= total) {
+            clearInterval(tick);
+            setStep(STEP_DURATIONS.length);
+            modalProgress.style.width = '100%';
+            modalCta.classList.remove('hidden');
+            modalCta.classList.add('flex');
+          }
+        }, 30);
+        modalTimers.push(tick);
+      }
+
+      function closeModal() {
+        clearModalTimers();
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      modalCta.addEventListener('click', function () {
+        wak();
+        closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+      });
+
+      // ---------- Form / sticky submit ----------
+      var stockInput = document.getElementById('stock-input');
+      var heroBtn = document.getElementById('hero-analyse');
+      var stockError = document.getElementById('stock-error');
+      var stickyInput = document.getElementById('sticky-input');
+      var stickyBtn = document.getElementById('sticky-analyse');
+
+      function analyse(stockEl, errorEl) {
+        var val = stockEl.value.trim();
+        if (!val) {
+          if (errorEl) { errorEl.textContent = 'Please enter a stock name'; errorEl.classList.remove('hidden'); }
+          return;
+        }
+        if (errorEl) { errorEl.classList.add('hidden'); }
+        stockEl.value = '';
+        runModal(val);
+      }
+
+      heroBtn.addEventListener('click', function () { analyse(stockInput, stockError); });
+      stockInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); analyse(stockInput, stockError); } });
+      stockInput.addEventListener('input', function () { stockError.classList.add('hidden'); });
+
+      stickyBtn.addEventListener('click', function () { analyse(stickyInput, null); });
+      stickyInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); analyse(stickyInput, null); } });
+
+      // ---------- Cookie Consent (CMP) ----------
+      var cmp = document.getElementById('cookie-consent');
+      try { if (!localStorage.getItem('intds_cmp_consent')) cmp.classList.remove('hidden'); } catch (e) { cmp.classList.remove('hidden'); }
+      document.getElementById('cookie-consent-accept').addEventListener('click', function () {
+        try { localStorage.setItem('intds_cmp_consent', 'accepted'); } catch (e) {}
+        cmp.classList.add('hidden');
+      });
+
+      // ---------- Cookie consent ----------
+      var cookieKey = 'intds_cookie_consent';
+      var banner = document.getElementById('cookie-banner');
+      try {
+        if (!localStorage.getItem(cookieKey)) { banner.classList.remove('hidden'); }
+      } catch (e) { banner.classList.remove('hidden'); }
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        try { localStorage.setItem(cookieKey, 'accepted'); } catch (e) {}
+        banner.classList.add('hidden');
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function () {
+        try { localStorage.setItem(cookieKey, 'declined'); } catch (e) {}
+        banner.classList.add('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>
